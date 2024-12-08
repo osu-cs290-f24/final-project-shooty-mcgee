@@ -1,0 +1,38 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #f67811;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+header a {
+  color: #fff;
+}
+
+.header-image-container img {
+  max-height: 100px;
+}
+
+.site-title {
+  font-size: 80px;
+  font-weight: 100;
+  margin: 0 0 0 20px;
+}
+
+.site-title a:hover {
+  text-decoration: none;
+}
