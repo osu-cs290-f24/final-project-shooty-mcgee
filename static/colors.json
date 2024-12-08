@@ -1,0 +1,17 @@
+[
+    {
+      "colorText": "Red",
+      "colorID": "#ff0000"
+    },
+
+    {
+        "colorText": "Blue",
+        "colorID": "#0000FF"
+    },
+
+    {
+        "colorText": "Green",
+        "colorID": "#008000"
+    }
+   
+  ]

@@ -19,6 +19,15 @@ html, body {
   background-color: var(--dark);
 }
 
+/* canvas {
+  background-color: var(--purple);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} */
+
 a {
   text-decoration: none;
 }
@@ -90,10 +99,83 @@ header a {
   background-color: rgba(102, 60, 192, 0.75);
 }
 
-.canvas {
+#canvas1 {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 100%;
   align-items: center;
 }
+
+/*Section for the game page*/
+
+/*Score display:*/
+
+.score-display{
+  font-family: "Geo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4em;
+  background-color: var(--purple);
+  color: white;
+
+  border: 5px, solid white;
+
+  width: 30rem;
+  height: 6rem;
+  margin: 2rem 0;
+
+  display: flex;
+  justify-content: center;
+
+  position: fixed; /* Position the element fixed relative to the viewport */
+  bottom: 0;   
+  left: 0rem;        
+
+
+}
+
+.score-display:hover{
+  scale: 1.05;
+}
+
+.score-display:active{
+  background-color: var(--blue)
+
+}
+
+#color-display {
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--purple);
+
+  border: 5px, solid white;
+
+  width: 30rem;
+  height: 6rem;
+  margin: 2rem 0;
+  
+  width: 30rem;
+  height: 6rem;
+  margin: 2rem 0;
+
+  position: fixed; /* Position the element fixed relative to the viewport */
+  bottom: 0;   
+  right: 0rem;  
+
+  
+}
+
+#color-display .text {
+  font-family: "Geo", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 4em;
+  color: white;
+  
+  
+}
+
