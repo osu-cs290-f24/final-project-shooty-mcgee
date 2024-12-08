@@ -12,8 +12,16 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static('static'))
 
+app.get("/play", function(req, res, next) {
+  res.render("game", {
+    header: false
+  })
+})
+
 app.get("/", function(req, res, next) {
-  res.render("mainPage")
+  res.render("mainPage", {
+    header: true
+  })
 })
 
 app.listen(port, function () {

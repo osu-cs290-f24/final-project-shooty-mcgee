@@ -16,15 +16,9 @@
   </head>
   <body>
 
-    <header>
-
-      <div class="header-image-container">
-        <img src="/test.png" alt="Test Logo">
-      </div>
-
-      <h1 class="site-title"><a href="#">Final</a></h1>
-
-    </header>
+    {{#if header}}
+      {{> header}}
+    {{/if}}
 
     {{{body}}}
 

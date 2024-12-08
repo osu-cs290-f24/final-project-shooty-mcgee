@@ -1,6 +1,5 @@
 :root {
   /* CSS HEX */
-  /* --cyan: rgb(0, 255, 255) */
   --dark: rgb(29, 23, 52);
   --blue: rgb(43, 31, 117);
   --purple: rgb(102, 60, 192);
@@ -70,7 +69,6 @@ header a {
   font-weight: 400;
   font-style: normal;
   font-size: 4em;
-  color: white;
   background-color: var(--purple);
 
   width: 30rem;
@@ -78,6 +76,10 @@ header a {
   margin: 2rem 0;
 
   border: none;
+
+  * {
+    color: #fff;
+  }
 }
 
 .start-menu button:hover {
