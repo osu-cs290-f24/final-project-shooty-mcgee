@@ -26,8 +26,6 @@ const hbs = exphbs.create({
 // Game page
 app.get("/play", function(req, res, next) {
 
-  console.log(colors[0].colorText)
-
   res.render("game", {
     colorText: colors[1].colorText,
     colorID: colors[1].colorID,
@@ -35,6 +33,16 @@ app.get("/play", function(req, res, next) {
     isGamePage: true
   })
 })
+
+// Game page
+app.get("/leaderboard", function(req, res, next) {
+
+  res.render("Leaderboard", {
+    header: true,
+    isGamePage: false
+  })
+})
+
 
 // Start and leaderboard page
 app.get("/", function(req, res, next) {

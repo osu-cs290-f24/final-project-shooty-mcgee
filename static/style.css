@@ -13,20 +13,24 @@ html, body {
   flex-direction: column;
   height:100%;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Geo', sans-serif;
   margin: 0;
 
   background-color: var(--dark);
 }
 
-/* canvas {
-  background-color: var(--purple);
+canvas {
+  /* background-color: var(--purple); */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-} */
+}
+
+#collision1 {
+  opacity: 0;
+}
 
 a {
   text-decoration: none;
@@ -109,7 +113,7 @@ header a {
 
 /*Section for the game page*/
 
-/*Score display:*/
+/*Score display: implemented by Chloe*/
 
 .score-display{
   font-family: "Geo", sans-serif;
@@ -144,6 +148,8 @@ header a {
 
 }
 
+/*Color display: implemented by Chloe*/
+
 #color-display {
   
   display: flex;
@@ -175,7 +181,17 @@ header a {
   font-style: normal;
   font-size: 4em;
   color: white;
-  
-  
 }
 
+/*cursor display: implemented by Chloe (Doesn't seem to work yet)*/
+
+.container{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  cursor: url('https://cdn-icons-png.flaticon.com/512/730/730781.png'), auto;
+}
+
+/*Scoreboard/Leaderboard display: implemented by Chloe*/
