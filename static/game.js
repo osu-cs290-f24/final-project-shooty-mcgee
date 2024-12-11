@@ -14,8 +14,9 @@ let timeToNextEnemy = 50
 let EnemyInterval = 500
 let lastTime = 0
 
-let colorTime = 3000
-let colorBonus = "Blue";
+let colorTime = 15000
+let bonusColor = "Blue"
+let penaltyColor = "Red"
 
 var enemies = []
 let score = 0
@@ -25,10 +26,6 @@ const enemyColor = ['EnemyRed.png', 'EnemyGreen.png', 'EnemyBlue.png']
 const mainColor = ['Red', 'Green', 'Blue']
 const soundEffect = ['pow.wav', 'pew.wav', 'pop.wav']
 
-// document.addEventListener('DOMContentLoaded', function() {
-//   const scoreButton = document.getElementById('score-display')
-//   scoreButton.addEventListener('click', on_enemy_hit)
-// })
 
 // Function to update the score when an enemy is hit: Made by Chloe
 function on_enemy_hit(point) {
@@ -37,23 +34,41 @@ function on_enemy_hit(point) {
 }
 
 
-//function to update the color every X minutes that the player will lose points for hitting: Made by Chloe
-function update_color(colorText, colorID){
-  // Update the background color, text content, and color bonus
-  document.getElementById('color-display').style.backgroundColor = colorID
-  document.getElementById('color-display').querySelector('.text').textContent = `Color: ${colorText}`
-  colorBonus = colorText
+function update_lives_display() {
+  document.getElementById("lives-display").querySelector('.text').textContent = `Lives : ${lives}`
 }
+
+
+//function to update the color every X minutes that the player will lose points for hitting: Made by Chloe
+function update_bonus_color(colorText, colorID){
+  // Update the background color, text content, and color bonus
+  document.getElementById('bonus-color-display').style.backgroundColor = colorID
+  document.getElementById('bonus-color-display').querySelector('.text').textContent = `Bonus: ${colorText}`
+  bonusColor = colorText
+}
+
+
+function update_penalty_color(colorText, colorID){
+  // Update the background color, text content, and color bonus
+  document.getElementById('penalty-color-display').style.backgroundColor = colorID
+  document.getElementById('penalty-color-display').querySelector('.text').textContent = `Penalty: ${colorText}`
+  penaltyColor = colorText
+}
+
 
 //Chooses the color from color array for update_color to set the new color to
-function color_timer(){
-  const randomColor = Math.floor(Math.random() * colors.length) // Generates a random integer from 0 to 3
-  update_color(colors[randomColor].colorText, colors[randomColor].colorID)
+function color_timer() {
+  const randomBonusColor = Math.floor(Math.random() * colors.length) // Generates a random integer from 0 to 3
+  update_bonus_color(colors[randomBonusColor].colorText, colors[randomBonusColor].colorID)
+
+  let randomPenaltyColor = Math.floor(Math.random() * colors.length)
+  while (randomPenaltyColor === randomBonusColor) {
+    randomPenaltyColor = Math.floor(Math.random() * colors.length)
+  }
+  update_penalty_color(colors[randomPenaltyColor].colorText, colors[randomPenaltyColor].colorID)
 
 }
 
-//Calls color timer every 30 seconds to sec a new color
-setInterval(color_timer, colorTime)
 
 // Enemy object
 class Enemy {
@@ -80,7 +95,7 @@ class Enemy {
 
   update() {
     // Color bonus cause it to go faster
-    if (this.colorName === colorBonus) {
+    if (this.colorName === bonusColor) {
       this.x -= this.directionX * 0.75
       this.y += this.directionY * 0.75
     } else {
@@ -97,6 +112,7 @@ class Enemy {
     if (this.x < 0 - this.width) {
       this.delete = true
       lives--
+      update_lives_display()
     }
   }
 
@@ -106,6 +122,7 @@ class Enemy {
     ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
   }
 }
+
 
 // Hitmarker to display, can use animation
 let hitmarkers = []
@@ -140,35 +157,9 @@ class Hitmarker {
   }
 }
 
-window.addEventListener('click', function(enemy) {
-  const detectPixel = collisionCtx.getImageData(enemy.x, enemy.y, 1, 1)
-  const pixelData = detectPixel.data
-  let missed = true
-
-  // If an enemy's collision box matches the color id of the pixel clicked
-  // Very small chance of deleting multiple enemies if they have the same color id
-  enemies.forEach(enemy => {
-    if (enemy.randomColor[0] === pixelData[0] && enemy.randomColor[1] === pixelData[1]
-    && enemy.randomColor[2] === pixelData[2]) {
-      enemy.delete = true
-      hitmarkers.push(new Hitmarker(enemy.x, enemy.y, enemy.width))
-      if (colorBonus === enemy.colorName) {
-        on_enemy_hit(2)
-      } else {
-        on_enemy_hit(1)
-      }
-      missed = false
-    }
-  })
-  if (missed) {
-    lives--
-  }
-})
-
-document.getElementById("play-again").addEventListener('click', resetGame)
 
 // Reset all the stats
-function resetGame() {
+function reset_game() {
   lives = 100
   score = 0
   enemies = []
@@ -180,11 +171,13 @@ function resetGame() {
   animate()
 }
 
+
 // Display game over screen
-function gameOver() {
+function game_over() {
   let div = document.getElementById("game-over")
   div.style.display = "flex"
 }
+
 
 // Function to draw the next animation and spawn enemy based on set time
 function animate(timestamp=0) {
@@ -218,18 +211,46 @@ function animate(timestamp=0) {
   enemies = enemies.filter(enemy => !enemy.delete)
   hitmarkers = hitmarkers.filter(hitmarker => !hitmarker.delete)
 
+  // Check if player still has lives
   if (lives > 0) {
     requestAnimationFrame(animate)
   } else {
-    gameOver()
+    game_over()
   }
 }
+
+
+window.addEventListener('click', function(enemy) {
+  const detectPixel = collisionCtx.getImageData(enemy.x, enemy.y, 1, 1)
+  const pixelData = detectPixel.data
+  let missed = true
+
+  // If an enemy's collision box matches the color id of the pixel clicked
+  // Very small chance of deleting multiple enemies if they have the same color id
+  enemies.forEach(enemy => {
+    if (enemy.randomColor[0] === pixelData[0] && enemy.randomColor[1] === pixelData[1]
+    && enemy.randomColor[2] === pixelData[2]) {
+      enemy.delete = true
+      hitmarkers.push(new Hitmarker(enemy.x, enemy.y, enemy.width))
+
+      if (bonusColor === enemy.colorName) {on_enemy_hit(2)}
+      else if (penaltyColor === enemy.colorName) {on_enemy_hit(-1)}
+      else {on_enemy_hit(1)}
+
+      missed = false
+    }
+  })
+  if (missed) {
+    lives--
+    update_lives_display()
+  }
+})
+document.getElementById("play-again").addEventListener('click', reset_game)
+
+
+//Calls color timer every 30 seconds to sec a new color
+setInterval(color_timer, colorTime)
+update_lives_display()
+
+
 animate()
-
-
-
-
-
-
-
-
