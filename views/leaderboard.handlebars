@@ -1,0 +1,27 @@
+<div id="canvas1">
+  <section id="Leaderboard">
+    <h2>High scores:</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Player</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each leaderboard}}
+        <tr>
+          <td>{{@index}}</td>
+          <td>{{this.player}}</td>
+          <td>{{this.score}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <button type="button" id="back-button"><a href="/">Return</a></button>
+</div>
+
+<script src="/leaderboard.js" charset="utf-8"></script>

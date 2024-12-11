@@ -19,7 +19,7 @@ let colorBonus = "Blue";
 
 var enemies = []
 let score = 0
-let lives = 100
+let lives = 5
 
 const enemyColor = ['EnemyRed.png', 'EnemyGreen.png', 'EnemyBlue.png']
 const mainColor = ['Red', 'Green', 'Blue']
@@ -169,7 +169,7 @@ document.getElementById("play-again").addEventListener('click', resetGame)
 
 // Reset all the stats
 function resetGame() {
-  lives = 100
+  lives = 5
   score = 0
   enemies = []
   hitmarkers = []
@@ -182,9 +182,47 @@ function resetGame() {
 
 // Display game over screen
 function gameOver() {
-  let div = document.getElementById("game-over")
-  div.style.display = "flex"
+  let div = document.getElementById("game-over");
+  div.style.display = "flex";
 }
+
+
+// Save score function
+document.getElementById("save-score").addEventListener("click", function () {
+  const playerName = document.getElementById("player-name").value.trim();
+  if (!playerName) {
+    alert("Please enter your name to save your score.");
+    return;
+  }
+  fetch("/save-score", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      player: playerName,
+      score: score
+    })
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert("Score saved successfully!");
+      } else {
+        alert("Failed to save score. Please try again.");
+      }
+    })
+    .catch(error => {
+      console.error("Error saving score:", error);
+      alert("Error saving score. Please try again.");
+    });
+});
+
+ // Redirect to leaderboard page
+document.getElementById("leaderboard").addEventListener('click', function() {
+  window.location.href = '/leaderboard';
+});
+
 
 // Function to draw the next animation and spawn enemy based on set time
 function animate(timestamp=0) {
