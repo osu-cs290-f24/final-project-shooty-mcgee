@@ -5,8 +5,11 @@
 <button type="button" id="score-display" class="score-display">Score: 0</button>
 
 
-  <section id ="color-display" class="color-display" style="background-color: {{colorID}}">
-      <p class="text">Color: {{colorText}}</p>
-  </section>
-
+<section id ="color-display" class="color-display" style="background-color: {{colorID}}">
+    <p class="text">Color: {{colorText}}</p>
+</section>
+<div class="hidden" id="game-over">
+  <div type="button">Game Over</div>
+  <button>Play Again</button>
+</div>
 <script src="/game.js" charset="utf-8"></script>

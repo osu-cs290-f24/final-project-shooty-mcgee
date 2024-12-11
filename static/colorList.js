@@ -20,7 +20,7 @@ const colors = [
     },
 
     {
-        "colorText": "purple",
+        "colorText": "Purple",
         "colorID": "#800080"
     }
    
