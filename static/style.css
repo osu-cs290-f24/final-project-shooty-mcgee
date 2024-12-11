@@ -110,7 +110,7 @@ header a {
   font-size: 4em;
   background-color: var(--purple);
 
-  width: 20rem;
+  width: 25rem;
   height: 6rem;
   margin: 2rem 0;
 
@@ -143,6 +143,8 @@ header a {
 #Leaderboard {
   font-size: 30px;
   transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -342,7 +344,7 @@ header a {
   font-size: 4em;
   background-color: var(--purple);
 
-  width: 20rem;
+  width: 25rem;
   height: 6rem;
   margin: 2rem 0;
 
@@ -359,3 +361,6 @@ header a {
   background-color: rgba(102, 60, 192, 0.75);
 }
 
+table * {
+  text-align: center;
+}

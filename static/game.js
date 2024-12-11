@@ -20,10 +20,10 @@ let penaltyColor = "Red"
 
 var enemies = []
 let score = 0
-let lives = 5
+let lives = 20
 
-const enemyColor = ['EnemyRed.png', 'EnemyGreen.png', 'EnemyBlue.png']
-const mainColor = ['Red', 'Green', 'Blue']
+const enemyColor = ['EnemyRed.png', 'EnemyGreen.png', 'EnemyBlue.png', 'EnemyOrange.png', 'EnemyPurple.png']
+const mainColor = ['Red', 'Green', 'Blue', 'Orange', 'Purple']
 const soundEffect = ['pow.wav', 'pew.wav', 'pop.wav']
 
 
@@ -49,7 +49,7 @@ function update_bonus_color(colorText, colorID){
 
 
 function update_penalty_color(colorText, colorID){
-  // Update the background color, text content, and color bonus
+  // Update the background color, text content, and color penalty
   document.getElementById('penalty-color-display').style.backgroundColor = colorID
   document.getElementById('penalty-color-display').querySelector('.text').textContent = `Penalty: ${colorText}`
   penaltyColor = colorText
@@ -73,10 +73,9 @@ function color_timer() {
 // Enemy object
 class Enemy {
   constructor() {
-    this.spriteWidth = 615
-    this.spriteHeight = 378
-    // this.sizeModifier = Math.random() * 0.03 + 0.03
-    this.sizeModifier = Math.random() * .1 + .2
+    this.spriteWidth = 2000
+    this.spriteHeight = 2000
+    this.sizeModifier = Math.random() * .05 + .075
     this.width = this.spriteWidth * this.sizeModifier
     this.height = this.spriteHeight * this.sizeModifier
     this.x = canvas.width
@@ -84,7 +83,7 @@ class Enemy {
     this.directionX = Math.random() * 5 + 3
     this.directionY = Math.random() * 5 - 2.5
     this.delete = false
-    this.colorIndex = Math.floor(Math.random() * 3)
+    this.colorIndex = Math.floor(Math.random() * enemyColor.length)
     this.image = new Image()
     this.image.src = enemyColor[this.colorIndex]
     this.colorName = mainColor[this.colorIndex]
@@ -110,9 +109,13 @@ class Enemy {
 
     // Mark for deletion if it's offscreen
     if (this.x < 0 - this.width) {
-      this.delete = true
-      lives--
-      update_lives_display()
+      if (this.colorName == penaltyColor) {
+        this.delete = true
+      } else {
+        this.delete = true
+        lives--
+        update_lives_display()
+      }
     }
   }
 
