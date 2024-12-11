@@ -3,9 +3,17 @@
 
 <button type="button" id="score-display" class="score-display">Score: 0</button>
 
-<section id="color-display" class="color-display" style="background-color: {{colorID}}">
-  <p class="text">Color: {{colorText}}</p>
-</section>
+<button id ="bonus-color-display" class="colors-display" style="background-color: {{bonusColorID}}">
+  <p class="text">Bonus: {{bonusColorText}}</p>
+</button>
+
+<button id="lives-display" class="colors-display">
+  <p class="text">Lives: {{lives}}</p>
+</button>
+
+<button id ="penalty-color-display" class="colors-display" style="background-color: {{penaltyColorID}}">
+  <p class="text">Penalty: {{penaltyColorText}}</p>
+</button>
 
 <div id="game-over">
   <div class="game-over-menu">

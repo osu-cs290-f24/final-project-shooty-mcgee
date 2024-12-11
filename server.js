@@ -23,8 +23,12 @@ const scoresFilePath = path.join(__dirname, 'static', 'scores.json');
 // Game page
 app.get("/play", function(req, res, next) {
   res.render("game", {
-    colorText: colors[1].colorText,
-    colorID: colors[1].colorID,
+    bonusColorText: colors[1].colorText,
+    bonusColorID: colors[1].colorID,
+
+    penaltyColorText: colors[0].colorText,
+    penaltyColorID: colors[0].colorID,
+
     header: false,
     isGamePage: true
   });
