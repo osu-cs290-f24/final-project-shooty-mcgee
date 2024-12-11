@@ -55,12 +55,6 @@ function color_timer(){
 //Calls color timer every 30 seconds to sec a new color
 setInterval(color_timer, colorTime)
 
-
-
-
-
-
-
 // Enemy object
 class Enemy {
   constructor() {
@@ -103,7 +97,6 @@ class Enemy {
     if (this.x < 0 - this.width) {
       this.delete = true
       lives--
-      console.log(lives)
     }
   }
 
@@ -159,9 +152,6 @@ window.addEventListener('click', function(enemy) {
     && enemy.randomColor[2] === pixelData[2]) {
       enemy.delete = true
       hitmarkers.push(new Hitmarker(enemy.x, enemy.y, enemy.width))
-      console.log(colorBonus)
-      console.log(enemy.colorName)
-      console.log(colorBonus === enemy.colorName)
       if (colorBonus === enemy.colorName) {
         on_enemy_hit(2)
       } else {
@@ -172,12 +162,28 @@ window.addEventListener('click', function(enemy) {
   })
   if (missed) {
     lives--
-    console.log(lives)
   }
 })
 
+document.getElementById("play-again").addEventListener('click', resetGame)
+
+// Reset all the stats
+function resetGame() {
+  lives = 100
+  score = 0
+  enemies = []
+  hitmarkers = []
+
+  let div = document.getElementById("game-over")
+  div.style.display = "none"
+
+  animate()
+}
+
+// Display game over screen
 function gameOver() {
-  // Display game over modal and stop the spawning
+  let div = document.getElementById("game-over")
+  div.style.display = "flex"
 }
 
 // Function to draw the next animation and spawn enemy based on set time
@@ -212,10 +218,11 @@ function animate(timestamp=0) {
   enemies = enemies.filter(enemy => !enemy.delete)
   hitmarkers = hitmarkers.filter(hitmarker => !hitmarker.delete)
 
-
-  console.log(typeof(colorBonus))
-
-  requestAnimationFrame(animate)
+  if (lives > 0) {
+    requestAnimationFrame(animate)
+  } else {
+    gameOver()
+  }
 }
 animate()
 
