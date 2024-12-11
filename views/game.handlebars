@@ -1,9 +1,7 @@
-
 <canvas id="collision1"></canvas>
 <canvas id="canvas1"></canvas>
 
 <button type="button" id="score-display" class="score-display">Score: 0</button>
-
 
 <button id ="bonus-color-display" class="colors-display" style="background-color: {{bonusColorID}}">
   <p class="text">Bonus: {{bonusColorText}}</p>
@@ -19,8 +17,13 @@
 
 <div id="game-over">
   <div class="game-over-menu">
-    <button>Game Over</button>
+    <p>Game Over</p>
+    <label for="player-name" class="player-name-label">Enter your name:</label>
+    <input type="text" id="player-name" class="player-name-input" placeholder="Your name">
+    <button type="button" id="save-score">Save Score</button>
     <button type="button" id="play-again">Play Again</button>
+    <button type="button" id="leaderboard">Leaderboard</button>
   </div>
 </div>
+
 <script src="/game.js" charset="utf-8"></script>
