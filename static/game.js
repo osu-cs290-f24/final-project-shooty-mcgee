@@ -95,11 +95,11 @@ class Enemy {
   update() {
     // Color bonus cause it to go faster
     if (this.colorName === bonusColor) {
-      this.x -= this.directionX * 0.75
-      this.y += this.directionY * 0.75
+      this.x -= this.directionX * 3
+      this.y += this.directionY * 3
     } else {
-      this.x -= this.directionX * 0.5
-      this.y += this.directionY * 0.5
+      this.x -= this.directionX * 2
+      this.y += this.directionY * 2
     }
 
     // Bounce off the edges
@@ -142,7 +142,7 @@ class Hitmarker {
     this.sound = new Audio()
     this.sound.src = soundEffect[Math.floor(Math.random() * 3)]
     this.delete = false
-    this.frameDuration = 100
+    this.frameDuration = 100  
     this.timeSinceLastFrame = 0
   }
 
@@ -163,7 +163,7 @@ class Hitmarker {
 
 // Reset all the stats
 function reset_game() {
-  lives = 100
+  lives = 20
   score = 0
   enemies = []
   hitmarkers = []

@@ -4,7 +4,7 @@ var exphbs = require('express-handlebars');
 const fs = require('fs');
 
 var app = express();
-var port = process.env.PORT || 5500;
+var port = process.env.PORT || 50000;
 
 const colors = require("./static/colors.json");
 
